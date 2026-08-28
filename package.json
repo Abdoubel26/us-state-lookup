@@ -1,0 +1,13 @@
+{
+  "name": "us-state-lookup",
+  "version": "1.0.0",
+  "description": "A simple lookup for US state information",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": ["us-states", "fips", "postal-codes", "states", "lookup"],
+  "author": "Abdou Belounis",
+  "license": "MIT",
+  "type": "module"
+}
