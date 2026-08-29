@@ -4,10 +4,20 @@
   "description": "A simple lookup for US state information",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node --experimental-strip-types index.ts"
   },
-  "keywords": ["us-states", "fips", "postal-codes", "states", "lookup"],
+  "keywords": [
+    "us-states",
+    "fips",
+    "postal-codes",
+    "states",
+    "lookup"
+  ],
   "author": "Abdou Belounis",
   "license": "MIT",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^26.4.0",
+    "typescript": "^7.0.2"
+  }
 }
