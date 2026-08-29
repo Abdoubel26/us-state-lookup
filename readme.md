@@ -1,6 +1,6 @@
 # 🗺️ us-state-lookup
 
-> A lightweight, zero-dependency JavaScript utility to look up US state information seamlessly using any identifier: FIPS code, postal abbreviation, state name, or admission order.
+> A lightweight, zero-dependency TypeScript utility to look up US state information seamlessly using any identifier: FIPS code, postal abbreviation, state name, or admission order.
 
 ---
 
@@ -43,7 +43,7 @@ pnpm add us-state-lookup
 
 ## 🚀 Quick Start & Usage
 
-```javascript
+```typescript
 import findState, { states } from 'us-state-lookup';
 
 // Basic usage
@@ -62,25 +62,58 @@ findState("MA");
 
 `findState` is designed to be extremely flexible and handles all edge cases seamlessly—including unpadded numbers, raw integers, mixed casing, and non-standard strings:
 
-```javascript
+```typescript
 import findState from 'us-state-lookup';
 
 // All of these edge cases work seamlessly out of the box:
-console.log(findState(32).name);                          // "Nevada"
-console.log(findState("31sT").name);                     // "California"
-console.log(findState("2").name);                        // "Alaska"
-console.log(findState("HawaII").admissionOrder);         // "50th"
-console.log(findState("Az").name);                       // "Arizona"
+console.log(findState(32)?.name);                          // "Nevada"
+console.log(findState("31sT")?.name);                     // "California"
+console.log(findState("2")?.name);                        // "Alaska"
+console.log(findState("MA")?.name);                       // "Massachusetts"
+console.log(findState("34th")?.name);                     // "Kansas"
+console.log(findState("IDAHO")?.admissionOrder);          // "43rd"
+console.log(findState("HawaII")?.admissionOrder);         // "50th"
+console.log(findState("35th")?.name);                     // "West Virginia"
+console.log(findState("AR")?.admissionOrder);             // "25th"
+console.log(findState("North Carolina")?.admissionOrder); // "12th"
+console.log(findState("ma")?.name);                       // "Massachusetts"
+console.log(findState("Az")?.name);                       // "Arizona"
 ```
 
 ## 📊 Accessing Raw Data
 
 Need the entire dataset for dropdown menus, tables, or custom lookups? Import `states` directly:
 
-```javascript
+```typescript
 import { states } from 'us-state-lookup';
 
 console.log(states.length); // 50
+```
+
+## 🔎 TypeScript Support
+
+The package is written in TypeScript and exports the `State` type:
+
+```typescript
+import findState, { State } from 'us-state-lookup';
+
+const state: State | null = findState("CA");
+
+console.log(state?.name);           // "California"
+console.log(state?.postal);         // "CA"
+console.log(state?.fips);           // "06"
+console.log(state?.admissionOrder); // "31st"
+```
+
+The `State` type is defined as:
+
+```typescript
+export type State = {
+  fips: string | number;
+  name: string;
+  postal: string;
+  admissionOrder: string;
+};
 ```
 
 ## 📄 License
